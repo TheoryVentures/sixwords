@@ -1,0 +1,163 @@
+{
+  "$format": "contextdoc/nested-v1",
+  "$legend": {
+    "what_this_is": "A concept packaged into exactly six words, plus the full subtext of how they were written. The human-facing text is the six words in the single sentence; the full argument, iterations, and human/AI collaboration that produced them are recorded on the sentence's meta and the document metadata.",
+    "how_to_read": [
+      "The six words are sentence s-0001. Its text is the entire human-facing artifact.",
+      "sentence.meta.backstory is the full idea the six words compress — claim, mechanism, stakes.",
+      "sentence.meta.word_choices explains, word by word, why each word earned its slot and what alternatives were rejected.",
+      "sentence.meta.drafts is the chronological evolution of the six words, each entry stamped with who wrote it (human or agent) and why.",
+      "metadata.interview is the question/answer exchange between the writing assistant and the author that pinned the idea down.",
+      "metadata.candidates_considered lists every candidate the assistant proposed, including the ones that were not chosen.",
+      "Sentence provenance (authored_by, author_type, authorship_context) and metadata.edit_log answer who wrote the final words, when, and why."
+    ]
+  },
+  "metadata": {
+    "title": "The Lost Skill of Being Blocked",
+    "status": "final",
+    "created_at": "2026-08-04T18:35:47.094Z",
+    "purpose": "A concept packaged into six words; the full argument and the process that produced them are the subtext.",
+    "interview": [
+      {
+        "question": "What is the idea you want to package?",
+        "answer": "LLMs for AI coding is causing engineers to lose the ability to identify and articulate blockers."
+      }
+    ],
+    "candidates_considered": [
+      {
+        "story": "Engineers stopped naming what stops them.",
+        "appeal": "A diagnosis; the stopped/stops mirror makes the cause and the casualty the same verb.",
+        "chosen": true
+      },
+      {
+        "story": "Agents unblock us; we forget how.",
+        "appeal": "The mechanism as aphorism — constant unblocking atrophies the muscle.",
+        "chosen": false
+      },
+      {
+        "story": "Prompting past blockers, never naming them.",
+        "appeal": "The behavior itself — the re-prompt reflex replacing diagnosis.",
+        "chosen": false
+      }
+    ],
+    "edit_log": [
+      {
+        "at": "2026-08-04T18:35:47.094Z",
+        "by": "claude-fable-5",
+        "action": "create_story",
+        "target_id": "s-0001",
+        "reason": "First pass at the mechanism: constant unblocking atrophies the muscle.",
+        "requested_by": "adam"
+      },
+      {
+        "at": "2026-08-04T18:35:47.094Z",
+        "by": "claude-fable-5",
+        "action": "edit_sentence",
+        "target_id": "s-0001",
+        "reason": "Shifted from mechanism to diagnosis; the stopped/stops mirror carries the loss."
+      },
+      {
+        "at": "2026-08-04T18:35:47.094Z",
+        "by": "adam",
+        "action": "finalize_story",
+        "target_id": "s-0001"
+      }
+    ],
+    "last_edited_at": "2026-08-04T18:35:47.094Z",
+    "version": 3
+  },
+  "sources": {},
+  "sections": [
+    {
+      "heading": "The Lost Skill of Being Blocked",
+      "level": 1,
+      "blocks": [
+        {
+          "type": "paragraph",
+          "sentences": [
+            {
+              "meta": {
+                "drafts": [
+                  {
+                    "text": "Agents unblock us; we forget how.",
+                    "by": "claude-fable-5",
+                    "author_type": "agent",
+                    "at": "2026-08-04T18:35:47.094Z",
+                    "rationale": "First pass at the mechanism: constant unblocking atrophies the muscle."
+                  },
+                  {
+                    "text": "Engineers stopped naming what stops them.",
+                    "by": "claude-fable-5",
+                    "author_type": "agent",
+                    "at": "2026-08-04T18:35:47.094Z",
+                    "rationale": "Shifted from mechanism to diagnosis; the stopped/stops mirror carries the loss."
+                  }
+                ],
+                "backstory": "Being blocked used to be an experience engineers sat inside. You noticed progress had stalled, isolated why, and — the hard part — put it into words precise enough that a teammate could act on them. That articulation was the skill: \"we're blocked on X because Y\" is how engineers escalate, how teams route work, how organizations learn where the friction lives.\n\nCoding agents remove the sitting-inside. When progress stalls, the reflex is no longer to diagnose but to re-prompt: rephrase the request, paste more context, try another model. The blocker is never named because it never has to be — the agent either gets past it or the attempt is abandoned. The pain that trained the skill is gone, and so, gradually, is the skill.\n\nThe cost shows up in communication before it shows up in code. Status updates degrade from \"blocked on the auth service's rate limits\" to \"the agent isn't getting it.\" Escalations arrive without a nameable cause. The engineers most fluent with agents can be the least able to say what, precisely, is standing in their way — and an engineer who can't name what stops them can't ask for the right help.",
+                "word_choices": [
+                  {
+                    "word": "Engineers",
+                    "reason": "The subject is the people, not the tools — the loss belongs to them",
+                    "alternatives": [
+                      "We",
+                      "Developers"
+                    ]
+                  },
+                  {
+                    "word": "stopped",
+                    "reason": "Frames it as a loss over time, an atrophied skill, not an innate lack",
+                    "alternatives": [
+                      "forgot",
+                      "can't"
+                    ]
+                  },
+                  {
+                    "word": "naming",
+                    "reason": "The lost ability is articulation — you cannot escalate what you cannot say",
+                    "alternatives": [
+                      "seeing",
+                      "identifying",
+                      "articulating"
+                    ]
+                  },
+                  {
+                    "word": "what",
+                    "reason": "Leaves the blocker unspecified because the skill being lost is general",
+                    "alternatives": [
+                      "the"
+                    ]
+                  },
+                  {
+                    "word": "stops",
+                    "reason": "Mirrors \"stopped\" — the same verb for the blocker and the atrophy",
+                    "alternatives": [
+                      "blocks"
+                    ]
+                  },
+                  {
+                    "word": "them.",
+                    "reason": "Closes on the engineers; the cost lands on people, not projects",
+                    "alternatives": [
+                      "us."
+                    ]
+                  }
+                ]
+              },
+              "id": "s-0001",
+              "text": "Engineers stopped naming what stops them.",
+              "citations": [],
+              "authored_by": "claude-fable-5",
+              "authored_at": "2026-08-04T18:35:47.094Z",
+              "author_type": "agent",
+              "authorship_context": {
+                "action": "revise",
+                "reason": "Shifted from mechanism to diagnosis; the stopped/stops mirror carries the loss."
+              }
+            }
+          ]
+        }
+      ],
+      "subsections": []
+    }
+  ]
+}

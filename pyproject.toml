@@ -1,0 +1,41 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "sixwords"
+version = "0.1.0"
+description = "Package a concept into six words with an LLM; the words are the text, everything that produced them is the subtext."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "sentree",
+    "anthropic>=0.40",
+    "click>=8.1",
+    "rich>=13.0",
+]
+
+[project.scripts]
+sixwords = "sixwords.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+]
+
+[tool.uv.sources]
+sentree = { path = "../sentree", editable = true }
+
+[tool.hatch.build.targets.wheel]
+packages = ["sixwords"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

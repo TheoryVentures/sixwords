@@ -1,0 +1,147 @@
+{
+  "$format": "contextdoc/nested-v1",
+  "$legend": {
+    "what_this_is": "A concept packaged into exactly six words, plus the full subtext of how they were written. The human-facing text is the six words in the single sentence; the full argument, iterations, and human/AI collaboration that produced them are recorded on the sentence's meta and the document metadata.",
+    "how_to_read": [
+      "The six words are sentence s-0001. Its text is the entire human-facing artifact.",
+      "sentence.meta.backstory is the full idea the six words compress — claim, mechanism, stakes.",
+      "sentence.meta.word_choices explains, word by word, why each word earned its slot and what alternatives were rejected.",
+      "sentence.meta.drafts is the chronological evolution of the six words, each entry stamped with who wrote it (human or agent) and why.",
+      "metadata.interview is the question/answer exchange between the writing assistant and the author that pinned the idea down.",
+      "metadata.candidates_considered lists every candidate the assistant proposed, including the ones that were not chosen.",
+      "Sentence provenance (authored_by, author_type, authorship_context) and metadata.edit_log answer who wrote the final words, when, and why."
+    ]
+  },
+  "metadata": {
+    "title": "Skip the Struggle, Skip the Skill",
+    "status": "final",
+    "created_at": "2026-08-04T21:35:42.874Z",
+    "purpose": "A concept packaged into six words; the full argument and the process that produced them are the subtext.",
+    "interview": [
+      {
+        "question": "What's the idea you're compressing? Give me the roughest, truest version of it — even a messy sentence is fine, we'll sharpen it later.",
+        "answer": "The idea I'm compressing is that using AI coding tools as a software engineer leads to engineer's ability to identify and articulate blockers atrophies."
+      },
+      {
+        "question": "Good starting point. A few questions to sharpen it:\n\nFirst: what's the actual mechanism here? Is it that AI tools remove the *struggle* of hitting a blocker (so engineers never practice naming the problem), or that AI gives an *answer* so fast the engineer never has to diagnose what was actually wrong in the first place?",
+        "answer": "The problem is that AI coding tools are great at going from 0 -> 1 on building some feature that engineers don't have to think hard about how to get from 0 -> 1. This doesn't matter that much when it's just a code problem, but as you progress in your career as a software eng, a lot of the bottlenecks are architectural or organizational"
+      },
+      {
+        "question": "Sharp distinction. So the atrophy is specifically in *diagnosing non-code bottlenecks* — architecture, org friction, ambiguous requirements — because AI absorbed the reps on code-level problems, leaving no practice for the harder, fuzzier blockers where the real career growth happens?",
+        "answer": "Exactly"
+      },
+      {
+        "question": "Who most needs to hear this — engineers themselves worried about their own growth, or managers/orgs deciding how to deploy these tools? And should the six words land as a warning (alarm), a diagnosis (recognition — \"yes, that's what's happening to me\"), or something you'd argue about at a table?",
+        "answer": "I think it's mostly diagnosis. My claim is that managers/orgs as well as individual engineers should be aware of the problem so they don't fall into the trap. I wrote a blog post expanding on it more: https://theoryvc.com/blog-posts/taste-driven-development"
+      },
+      {
+        "question": "One more to sharpen against confusion: what's the lazy version of this claim that you *don't* want people to hear — like \"AI makes engineers dumb\" or \"junior engineers are doomed\"? What would a bad, reductive misreading sound like?",
+        "answer": "A bad reductive claim would sound like something trying to convince people not to use AI coding tools. They should absolutely be using them, just need to be aware of the dside effects so they can plan accordingly"
+      },
+      {
+        "question": "Good choice — it's the most quotable of the three. Want to lock it in as-is, or tweak any word first (e.g., \"skill\" vs. something sharper like \"instinct\")?",
+        "answer": "lock in"
+      }
+    ],
+    "candidates_considered": [],
+    "edit_log": [
+      {
+        "at": "2026-08-04T21:35:42.874Z",
+        "by": "claude-sonnet-5",
+        "action": "create_story",
+        "target_id": "s-0001",
+        "requested_by": "adamconway"
+      },
+      {
+        "at": "2026-08-04T21:35:42.877Z",
+        "by": "adamconway",
+        "action": "finalize_story",
+        "target_id": "s-0001"
+      }
+    ],
+    "last_edited_at": "2026-08-04T21:35:42.877Z",
+    "version": 2
+  },
+  "sources": {},
+  "sections": [
+    {
+      "heading": "Skip the Struggle, Skip the Skill",
+      "level": 1,
+      "blocks": [
+        {
+          "type": "paragraph",
+          "sentences": [
+            {
+              "meta": {
+                "drafts": [
+                  {
+                    "text": "Skip the struggle, skip the skill.",
+                    "by": "claude-sonnet-5",
+                    "author_type": "agent",
+                    "at": "2026-08-04T21:35:42.874Z"
+                  }
+                ],
+                "backstory": "AI coding tools are extraordinarily good at 0-to-1 work — turning a clear feature request into working code without the engineer having to sit inside the problem. That's a genuine win for code-level tasks. But the reps an engineer used to get from wrestling with those problems — the practice of naming exactly what's blocking progress — quietly disappear when the tool absorbs the struggle.\n\nEarly in a career, this doesn't matter much: most blockers are code-shaped, and AI handles them well. But as engineers advance, the real bottlenecks stop being about syntax or logic and start being architectural or organizational — ambiguous ownership, systems that don't compose, incentives pointing the wrong way. Diagnosing those problems is a skill built the same way any diagnostic skill is built: by repeatedly sitting with friction until you can name its source. If AI has quietly stripped out the practice rounds, engineers may reach the point where the stakes are highest without ever having built the muscle to see clearly.\n\nThe claim is not anti-AI — engineers and organizations should absolutely keep using these tools, since the productivity gains are real. The point is awareness: know that the tool is trading immediate velocity for the slow, easy-to-miss loss of blocker-articulation ability. Understanding that tradeoff lets individuals and orgs plan for it — deliberately practicing the harder, non-code diagnostic work rather than assuming it'll show up automatically.\n\nThe six words compress this into a law-like aphorism: shortcutting the friction of solving a problem shortcuts the skill that friction was building. It's meant to land as recognition — \"yes, that's what's happening\" — not alarm, and to prompt engineers and managers alike to ask what practice they've quietly stopped getting.",
+                "word_choices": [
+                  {
+                    "word": "Skip",
+                    "reason": "Neutral verb for shortcutting — descriptive rather than accusatory, matching the 'aware, not afraid' stance.",
+                    "alternatives": [
+                      "Avoid",
+                      "Dodge",
+                      "Cut"
+                    ]
+                  },
+                  {
+                    "word": "the",
+                    "reason": "Article required for the parallel clause structure that gives the line its aphoristic rhythm.",
+                    "alternatives": []
+                  },
+                  {
+                    "word": "struggle,",
+                    "reason": "Names the productive friction of diagnosing a real blocker — the thing AI removes — more visceral than 'process' or 'difficulty.'",
+                    "alternatives": [
+                      "friction",
+                      "grind",
+                      "difficulty"
+                    ]
+                  },
+                  {
+                    "word": "skip",
+                    "reason": "Repeated verb creates the cause-and-effect click that makes the phrase quotable as a law rather than a complaint.",
+                    "alternatives": [
+                      "lose",
+                      "miss",
+                      "forfeit"
+                    ]
+                  },
+                  {
+                    "word": "the",
+                    "reason": "Mirrors the first clause's article to keep the two halves symmetrical.",
+                    "alternatives": []
+                  },
+                  {
+                    "word": "skill.",
+                    "reason": "Kept broad by the user's choice so it covers both code-level diagnosis and the higher-stakes architectural/organizational judgment that matters later in a career.",
+                    "alternatives": [
+                      "instinct",
+                      "muscle",
+                      "reflex"
+                    ]
+                  }
+                ]
+              },
+              "id": "s-0001",
+              "text": "Skip the struggle, skip the skill.",
+              "citations": [],
+              "authored_by": "claude-sonnet-5",
+              "authored_at": "2026-08-04T21:35:42.874Z",
+              "author_type": "agent"
+            }
+          ]
+        }
+      ],
+      "subsections": []
+    }
+  ]
+}
