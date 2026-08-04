@@ -16,7 +16,14 @@ from sixwords import story as story_mod
 from sixwords.interview import DraftCandidate, InterviewEngine, Turn
 from sixwords.reader import reveal
 
-DEFAULT_STORIES_DIR = Path("stories")
+DEFAULT_STORIES_DIR = Path.home() / ".sixwords" / "stories"
+
+_STORIES_DIR_OPTION = dict(
+    type=click.Path(path_type=Path),
+    default=DEFAULT_STORIES_DIR,
+    envvar="SIXWORDS_STORIES_DIR",
+    show_default=True,
+)
 
 
 @click.group()
@@ -26,12 +33,7 @@ def main() -> None:
 
 @main.command()
 @click.option("--author", default=getpass.getuser, help="Name recorded as the human author.")
-@click.option(
-    "--stories-dir",
-    type=click.Path(path_type=Path),
-    default=DEFAULT_STORIES_DIR,
-    help="Directory where stories are saved.",
-)
+@click.option("--stories-dir", help="Directory where stories are saved.", **_STORIES_DIR_OPTION)
 def write(author: str, stories_dir: Path) -> None:
     """Package a concept into six words with the coach."""
     console = Console()
@@ -260,12 +262,7 @@ def read(file: Path, show_all: bool) -> None:
 
 
 @main.command(name="list")
-@click.option(
-    "--stories-dir",
-    type=click.Path(path_type=Path),
-    default=DEFAULT_STORIES_DIR,
-    help="Directory to scan for stories.",
-)
+@click.option("--stories-dir", help="Directory to scan for stories.", **_STORIES_DIR_OPTION)
 def list_stories(stories_dir: Path) -> None:
     """List saved stories."""
     console = Console()

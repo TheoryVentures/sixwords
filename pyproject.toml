@@ -7,13 +7,32 @@ name = "sixwords"
 version = "0.1.0"
 description = "Package a concept into six words with an LLM; the words are the text, everything that produced them is the subtext."
 readme = "README.md"
+license = "MIT"
+authors = [{ name = "Adam Conway", email = "adam.n.conway@gmail.com" }]
+keywords = ["cli", "writing", "llm", "provenance", "subtext"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Text Processing",
+]
 requires-python = ">=3.11"
 dependencies = [
-    "sentree",
     "anthropic>=0.40",
     "click>=8.1",
     "rich>=13.0",
+    # Dependencies of the vendored sentree package (vendor/sentree).
+    "marko>=2.0",
+    "pydantic>=2.0",
+    "pysbd>=0.3",
 ]
+
+[project.urls]
+Homepage = "https://github.com/TheoryVentures/sixwords"
+Issues = "https://github.com/TheoryVentures/sixwords/issues"
 
 [project.scripts]
 sixwords = "sixwords.cli:main"
@@ -24,11 +43,8 @@ dev = [
     "ruff>=0.6",
 ]
 
-[tool.uv.sources]
-sentree = { path = "../sentree", editable = true }
-
 [tool.hatch.build.targets.wheel]
-packages = ["sixwords"]
+packages = ["sixwords", "vendor/sentree"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -36,6 +52,7 @@ testpaths = ["tests"]
 [tool.ruff]
 line-length = 100
 target-version = "py311"
+extend-exclude = ["vendor"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]

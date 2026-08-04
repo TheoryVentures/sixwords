@@ -27,9 +27,11 @@ Four modules under `sixwords/`, with a strict boundary around document writes:
 - `reader.py` — the reveal experience: six words first, then subtext layer by
   layer.
 
-The `sentree` dependency is an editable install from the sibling checkout at
-`../sentree` (see `[tool.uv.sources]` in `pyproject.toml`). It stays a pure
-library; editor/app logic never lands there.
+The `sentree` library is vendored at `vendor/sentree` and shipped as a
+top-level package inside the sixwords wheel (see `vendor/README.md` for the
+source commit and update procedure). It stays a pure library; editor/app
+logic never lands there — upstream changes go to the sentree repo first,
+then get re-vendored.
 
 ## The artifact
 
@@ -47,7 +49,9 @@ single sentence, `s-0001`:
 | provenance + `metadata.edit_log` | who wrote the final words (human vs agent), when, why |
 
 Files carry a top-level `$format` and `$legend` (see `story.LEGEND`); `load()`
-strips `$`-prefixed keys before `from_dict`. Saved stories live in `stories/`.
+strips `$`-prefixed keys before `from_dict`. Stories are saved to
+`~/.sixwords/stories` by default (`--stories-dir` / `SIXWORDS_STORIES_DIR`
+override); the repo's `stories/` directory holds example stories.
 
 ## Conventions
 
@@ -63,7 +67,7 @@ strips `$`-prefixed keys before `from_dict`. Saved stories live in `stories/`.
 ## Development
 
 ```bash
-uv sync                # deps, including sentree from ../sentree
+uv sync                # deps; sentree is vendored, no sibling checkout needed
 uv run pytest          # tests use a fake Anthropic client; no key or network
 uv run ruff check .    # lint (line length 100)
 ```

@@ -3,26 +3,31 @@
 Package a concept into exactly six words with an LLM coach. The six words
 are the human-facing text; everything that went into them — the full
 argument they compress, the interview, the drafts, the reason every word
-earned its slot — is the subtext, stored in a [sentree](../sentree)
-`.subtext.json` document.
+earned its slot — is the subtext, stored in a
+[sentree](https://github.com/TheoryVentures/sentree) `.subtext.json` document.
 
 ## Install
 
-Requires Python 3.11+ and [uv](https://docs.astral.sh/uv/). The `sentree`
-package is resolved from the sibling checkout at `../sentree`.
+Requires Python 3.11+ and an [Anthropic API key](https://console.anthropic.com/).
 
 ```bash
-uv sync
+uv tool install sixwords    # or: pipx install sixwords
 export ANTHROPIC_API_KEY=sk-ant-...
+```
+
+Or run it without installing:
+
+```bash
+uvx sixwords write
 ```
 
 ## Usage
 
 ```bash
-uv run sixwords write            # interview → drafts → accept → saved story
-uv run sixwords read stories/my-story.subtext.json   # six words, then the reveal
-uv run sixwords list             # stories written so far
-uv run sixwords export stories/my-story.subtext.json # surface markdown only
+sixwords write                              # interview → drafts → accept → saved story
+sixwords read <story>.subtext.json          # six words, then the reveal
+sixwords list                               # stories written so far
+sixwords export <story>.subtext.json        # surface markdown only
 ```
 
 `write` runs a short interview (the coach asks one question at a time to pin
@@ -34,6 +39,9 @@ the argument, and everything is saved.
 `read` shows only the six words first, then reveals the subtext layer by
 layer: the idea in full, the word-by-word rationale, the draft evolution,
 the interview, and the human/AI provenance. Pass `--all` to skip the pauses.
+
+Stories are saved to `~/.sixwords/stories` by default; override with
+`--stories-dir` or the `SIXWORDS_STORIES_DIR` environment variable.
 
 ## The artifact
 
@@ -54,6 +62,12 @@ The default model is `claude-sonnet-5`; override with `SIXWORDS_MODEL`.
 ## Development
 
 ```bash
+git clone https://github.com/TheoryVentures/sixwords
+cd sixwords
+uv sync
 uv run pytest        # tests use a fake Anthropic client; no key needed
 uv run ruff check .
 ```
+
+The `sentree` library is vendored at `vendor/sentree` (MIT); see
+`vendor/README.md` for how to update it.
