@@ -11,14 +11,15 @@ earned its slot — is the subtext, stored in a
 Requires Python 3.11+ and an [Anthropic API key](https://console.anthropic.com/).
 
 ```bash
-uv tool install sixwords    # or: pipx install sixwords
+uv tool install git+https://github.com/TheoryVentures/sixwords
+# or: pipx install git+https://github.com/TheoryVentures/sixwords
 export ANTHROPIC_API_KEY=sk-ant-...
 ```
 
 Or run it without installing:
 
 ```bash
-uvx sixwords write
+uvx --from git+https://github.com/TheoryVentures/sixwords sixwords write
 ```
 
 ## Usage
