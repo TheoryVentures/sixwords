@@ -29,6 +29,8 @@ sixwords write                              # interview → drafts → accept �
 sixwords read <story>.subtext.json          # six words, then the reveal
 sixwords list                               # stories written so far
 sixwords export <story>.subtext.json        # surface markdown only
+sixwords login                              # sign in to sixwordidea.com (email code)
+sixwords publish <story>.subtext.json       # publish a finalized story
 ```
 
 `write` runs a short interview (the coach asks one question at a time to pin
@@ -43,6 +45,19 @@ the interview, and the human/AI provenance. Pass `--all` to skip the pauses.
 
 Stories are saved to `~/.sixwords/stories` by default; override with
 `--stories-dir` or the `SIXWORDS_STORIES_DIR` environment variable.
+
+## Publishing
+
+Finalized stories can be published to
+[sixwordidea.com](https://sixwordidea.com): an index of six-word idea
+cards where each card links to the story's raw subtext JSON at
+`sixwordidea.com/ideas/<slug>.json` — a plain URL agents can fetch with no
+headers or keys.
+
+Publishing requires signing in once with `sixwords login` (a one-time code
+is emailed to you). Ideas land in a Supabase table, and a GitHub Action
+rebuilds the static site (`sixwords build-site`) and deploys it to GitHub
+Pages. Backend setup lives in [`supabase/README.md`](supabase/README.md).
 
 ## The artifact
 

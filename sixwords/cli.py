@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import getpass
+import json
 import os
 from pathlib import Path
 
@@ -12,8 +13,10 @@ from rich.panel import Panel
 from rich.table import Table
 from sentree import render
 
+from sixwords import site as site_mod
 from sixwords import story as story_mod
 from sixwords.interview import DraftCandidate, InterviewEngine, Turn
+from sixwords.publish import PublishError, SupabaseClient
 from sixwords.reader import reveal
 
 DEFAULT_STORIES_DIR = Path.home() / ".sixwords" / "stories"
@@ -301,6 +304,67 @@ def export(file: Path, output: Path | None) -> None:
         click.echo(f"Wrote {output}")
     else:
         click.echo(markdown)
+
+
+@main.command()
+@click.option("--email", prompt="Email", help="Email address to sign in with.")
+def login(email: str) -> None:
+    """Sign in to sixwordidea.com with a one-time email code."""
+    try:
+        client = SupabaseClient()
+        client.request_code(email)
+        code = click.prompt("Paste the sign-in link (or code) from your email").strip()
+        client.verify_code(email, code)
+    except PublishError as exc:
+        raise click.ClickException(str(exc)) from exc
+    click.echo(f"Signed in as {email}.")
+
+
+@main.command()
+@click.argument("file", type=click.Path(exists=True, path_type=Path))
+def publish(file: Path) -> None:
+    """Publish a finished story to sixwordidea.com."""
+    doc = story_mod.load(file)
+    if doc.metadata.get("status") != "final":
+        raise click.ClickException("Only finalized stories can be published.")
+    text = story_mod.story_text(doc)
+    if story_mod.word_count(text) != 6:
+        raise click.ClickException(
+            f"The story must be exactly six words; this one has {story_mod.word_count(text)}."
+        )
+    title = doc.metadata.get("title") or file.name.removesuffix(story_mod.FILE_SUFFIX)
+
+    try:
+        client = SupabaseClient()
+        url = client.publish(
+            slug=story_mod.slugify(title),
+            title=title,
+            story=text,
+            doc=json.loads(file.read_text(encoding="utf-8")),
+        )
+    except PublishError as exc:
+        raise click.ClickException(str(exc)) from exc
+    click.echo(f'Published "{text}"')
+    click.echo(f"Subtext: {url}")
+
+
+@main.command(name="build-site")
+@click.option(
+    "-o",
+    "--output",
+    type=click.Path(path_type=Path),
+    default=Path("_site"),
+    show_default=True,
+    help="Directory to write the static site into.",
+)
+def build_site(output: Path) -> None:
+    """Generate the sixwordidea.com static site from published ideas."""
+    try:
+        ideas = SupabaseClient().list_ideas()
+    except PublishError as exc:
+        raise click.ClickException(str(exc)) from exc
+    site_mod.build_site(ideas, output)
+    click.echo(f"Built site with {len(ideas)} idea(s) at {output}")
 
 
 if __name__ == "__main__":

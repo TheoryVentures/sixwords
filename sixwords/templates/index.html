@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>six word ideas</title>
+<meta name="description" content="Ideas compressed into exactly six words. The words are the text; everything that produced them is the subtext.">
+<style>
+  :root {
+    --paper: #faf7f2;
+    --ink: #1c1a17;
+    --muted: #8a8378;
+    --line: #e4ddd2;
+    --card: #fffdf9;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    line-height: 1.5;
+    padding: 4rem 1.5rem 6rem;
+  }
+  header { max-width: 44rem; margin: 0 auto 4rem; text-align: center; }
+  header h1 {
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  header .tagline {
+    margin-top: 1rem;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--muted);
+  }
+  main {
+    max-width: 72rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    gap: 1.25rem;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2.5rem;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 2rem 1.75rem 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 120ms ease, box-shadow 120ms ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(28, 26, 23, 0.08);
+  }
+  .words {
+    font-size: 1.6rem;
+    line-height: 1.3;
+    text-wrap: balance;
+  }
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .meta .title {
+    font-variant: small-caps;
+    letter-spacing: 0.05em;
+  }
+  .empty {
+    text-align: center;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 4rem;
+  }
+  footer {
+    max-width: 44rem;
+    margin: 5rem auto 0;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  footer a { color: inherit; }
+</style>
+</head>
+<body>
+<header>
+  <h1>six word ideas</h1>
+  <p class="tagline">Six words on the surface; the thinking that produced them underneath.
+    Each card links to its full subtext &mdash; raw JSON, made for agents.</p>
+</header>
+<main>
+{% for idea in ideas %}
+  <a class="card" href="/ideas/{{ idea.slug }}.json">
+    <p class="words">{{ idea.story }}</p>
+    <p class="meta">
+      <span class="title">{{ idea.title }}</span>
+      <span class="date">{{ idea.published_at[:10] }}</span>
+    </p>
+  </a>
+{% endfor %}
+</main>
+{% if not ideas %}
+<p class="empty">Nothing published yet. Be the first: <code>sixwords publish</code></p>
+{% endif %}
+<footer>
+  <p>Written with <a href="https://github.com/TheoryVentures/sixwords">sixwords</a>,
+    stored as <a href="https://github.com/TheoryVentures/sentree">sentree</a> subtext documents.</p>
+</footer>
+</body>
+</html>

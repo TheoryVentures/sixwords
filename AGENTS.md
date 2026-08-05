@@ -9,7 +9,7 @@ operate on the subtext.
 
 ## Architecture
 
-Four modules under `sixwords/`, with a strict boundary around document writes:
+Six modules under `sixwords/`, with a strict boundary around document writes:
 
 - `story.py` — the only module that reads or mutates the sentree `Document`.
   All drafts go through `Document.update_sentence` so provenance and the edit
@@ -25,7 +25,16 @@ Four modules under `sixwords/`, with a strict boundary around document writes:
   accepted words only ever existed in conversation — `_Session.finish`
   reconciles the document with the finalized text before saving.
 - `reader.py` — the reveal experience: six words first, then subtext layer by
-  layer.
+ layer.
+- `publish.py` — the sixwordidea.com backend client (Supabase): email
+ one-time-code sign-in with a session cached at
+ `~/.sixwords/credentials.json`, and inserts into the `ideas` table. Reads
+ are anonymous; publishing requires a signed-in user (enforced by
+ row-level security in `supabase/schema.sql`).
+- `site.py` — the static site generator for sixwordidea.com (Jinja template
+ in `sixwords/templates/`): an index of idea cards, each linking to the raw
+ subtext JSON at `/ideas/<slug>.json` so agents can fetch it with a plain
+ URL. Deployed to GitHub Pages by `.github/workflows/site.yml`.
 
 The `sentree` library is vendored at `vendor/sentree` and shipped as a
 top-level package inside the sixwords wheel (see `vendor/README.md` for the
