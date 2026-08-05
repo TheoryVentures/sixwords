@@ -79,7 +79,23 @@ class SupabaseClient:
         template, so both forms are accepted.
         """
         if code_or_link.startswith(("http://", "https://")):
-            token_hash = parse_qs(urlparse(code_or_link).query).get("token", [None])[0]
+            parsed = urlparse(code_or_link)
+            fragment = parse_qs(parsed.fragment)
+            if "access_token" in fragment:
+                # The link was already clicked: the browser landed on a page
+                # with the session tokens in the URL fragment. Save them.
+                self._save_session(
+                    email,
+                    {
+                        "access_token": fragment["access_token"][0],
+                        "refresh_token": fragment["refresh_token"][0],
+                        "expires_at": int(fragment["expires_at"][0])
+                        if "expires_at" in fragment
+                        else None,
+                    },
+                )
+                return email
+            token_hash = parse_qs(parsed.query).get("token", [None])[0]
             if not token_hash:
                 raise PublishError("That link has no sign-in token; paste the full email link.")
             payload = {"type": "magiclink", "token_hash": token_hash}

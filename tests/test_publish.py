@@ -87,6 +87,18 @@ def test_login_with_pasted_link_verifies_token_hash(fake, tmp_path):
     assert client.signed_in_email() == "adam@example.com"
 
 
+def test_login_with_clicked_redirect_url_saves_tokens(fake, tmp_path):
+    client = _client(fake, tmp_path)
+    url = "http://localhost:3000/#access_token=frag-access&refresh_token=frag-refresh&expires_at=1785893271&token_type=bearer&type=signup"
+    client.verify_code("adam@example.com", url)
+
+    assert fake.requests == []  # tokens come from the URL; no server call
+    saved = json.loads((tmp_path / "credentials.json").read_text())
+    assert saved["access_token"] == "frag-access"
+    assert saved["refresh_token"] == "frag-refresh"
+    assert saved["expires_at"] == 1785893271
+
+
 def test_login_with_tokenless_link_raises(fake, tmp_path):
     client = _client(fake, tmp_path)
     with pytest.raises(PublishError, match="no sign-in token"):
