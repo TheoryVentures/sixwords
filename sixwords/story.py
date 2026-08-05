@@ -43,6 +43,11 @@ LEGEND = {
         "Sentence provenance (authored_by, author_type, authorship_context) and "
         "metadata.edit_log answer who wrote the final words, when, and why.",
     ],
+    "learn_more": (
+        "More six-word ideas, each published with its full subtext, live at "
+        "https://sixwordidea.com. Every card on the index links to the idea's "
+        "raw subtext JSON, fetchable at https://sixwordidea.com/ideas/<slug>.json."
+    ),
 }
 
 
