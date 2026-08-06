@@ -45,19 +45,25 @@
   .card {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: 2.5rem;
+    gap: 1rem;
     background: var(--card);
     border: 1px solid var(--line);
     border-radius: 4px;
-    padding: 2rem 1.75rem 1.5rem;
-    text-decoration: none;
-    color: inherit;
+    padding: 2rem 1.75rem 1.25rem;
     transition: transform 120ms ease, box-shadow 120ms ease;
   }
   .card:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 24px rgba(28, 26, 23, 0.08);
+  }
+  .card-link {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2.5rem;
+    text-decoration: none;
+    color: inherit;
   }
   .words {
     font-size: 1.6rem;
@@ -76,6 +82,18 @@
     font-variant: small-caps;
     letter-spacing: 0.05em;
   }
+  .ask {
+    border-top: 1px solid var(--line);
+    padding-top: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .ask a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .ask a:hover { color: var(--ink); }
   .empty {
     text-align: center;
     color: var(--muted);
@@ -100,13 +118,21 @@
 </header>
 <main>
 {% for idea in ideas %}
-  <a class="card" href="/ideas/{{ idea.slug }}.json">
-    <p class="words">{{ idea.story }}</p>
-    <p class="meta">
-      <span class="title">{{ idea.title }}</span>
-      <span class="date">{{ idea.published_at[:10] }}</span>
+  {% set prompt = "What is this six word idea: https://" ~ domain ~ "/ideas/" ~ idea.slug ~ ".json" %}
+  <div class="card">
+    <a class="card-link" href="/ideas/{{ idea.slug }}.json">
+      <p class="words">{{ idea.story }}</p>
+      <p class="meta">
+        <span class="title">{{ idea.title }}</span>
+        <span class="date">{{ idea.published_at[:10] }}</span>
+      </p>
+    </a>
+    <p class="ask">Ask
+      <a href="https://claude.ai/new?q={{ prompt | urlencode }}" target="_blank" rel="noopener">Claude</a> &middot;
+      <a href="https://chatgpt.com/?q={{ prompt | urlencode }}" target="_blank" rel="noopener">ChatGPT</a> &middot;
+      <a href="https://cursor.com/link/prompt?text={{ prompt | urlencode }}" target="_blank" rel="noopener">Cursor</a>
     </p>
-  </a>
+  </div>
 {% endfor %}
 </main>
 {% if not ideas %}
