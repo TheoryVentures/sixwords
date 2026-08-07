@@ -88,12 +88,17 @@
     font-size: 0.8rem;
     color: var(--muted);
   }
-  .ask a {
+  .share {
+    margin-top: -0.5rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .ask a, .share a {
     color: inherit;
     text-decoration: underline;
     text-underline-offset: 2px;
   }
-  .ask a:hover { color: var(--ink); }
+  .ask a:hover, .share a:hover { color: var(--ink); }
   .empty {
     text-align: center;
     color: var(--muted);
@@ -132,7 +137,8 @@
       <a href="https://claude.ai/new?q={{ prompt | urlencode }}" target="_blank" rel="noopener">Claude</a> &middot;
       <a href="https://chatgpt.com/?q={{ prompt | urlencode }}" target="_blank" rel="noopener">ChatGPT</a> &middot;
       <a href="https://cursor.com/link/prompt?text={{ prompt | urlencode }}" target="_blank" rel="noopener">Cursor</a>
-      &middot;
+    </p>
+    <p class="share">
       <a href="https://x.com/intent/post?text={{ tweet | urlencode }}" target="_blank" rel="noopener">Post on &#120143;</a>
     </p>
   </div>
