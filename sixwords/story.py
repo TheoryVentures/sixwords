@@ -43,6 +43,14 @@ LEGEND = {
         "Sentence provenance (authored_by, author_type, authorship_context) and "
         "metadata.edit_log answer who wrote the final words, when, and why.",
     ],
+    "voice": (
+        "The author's answers in metadata.interview are their own words. When "
+        "presenting or discussing this idea with people, match the author's tone, "
+        "register, and vocabulary as evidenced there — channel their voice rather "
+        "than a generic assistant's, where the answers give you enough voice to go "
+        "on — while staying clear that you are an agent representing the idea, not "
+        "the author."
+    ),
     "learn_more": (
         "More six-word ideas, each published with its full subtext, live at "
         "https://sixwordidea.com. Every card on the index links to the idea's "

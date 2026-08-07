@@ -67,6 +67,7 @@ def test_save_load_round_trip(tmp_path):
     raw = json.loads(path.read_text())
     assert raw["$format"] == story.FORMAT
     assert "$legend" in raw
+    assert "author's tone" in raw["$legend"]["voice"]
 
     loaded = story.load(path)
     sentence = story.story_sentence(loaded)

@@ -119,6 +119,7 @@
 <main>
 {% for idea in ideas %}
   {% set prompt = "What is this six word idea: https://" ~ domain ~ "/ideas/" ~ idea.slug ~ ".json" %}
+  {% set tweet = idea.story ~ "\n\nThis idea was made on " ~ domain ~ ". @grok can tell you the full story behind it — the subtext is here: https://" ~ domain ~ "/ideas/" ~ idea.slug ~ ".json" %}
   <div class="card">
     <a class="card-link" href="/ideas/{{ idea.slug }}.json">
       <p class="words">{{ idea.story }}</p>
@@ -131,6 +132,8 @@
       <a href="https://claude.ai/new?q={{ prompt | urlencode }}" target="_blank" rel="noopener">Claude</a> &middot;
       <a href="https://chatgpt.com/?q={{ prompt | urlencode }}" target="_blank" rel="noopener">ChatGPT</a> &middot;
       <a href="https://cursor.com/link/prompt?text={{ prompt | urlencode }}" target="_blank" rel="noopener">Cursor</a>
+      &middot;
+      <a href="https://x.com/intent/post?text={{ tweet | urlencode }}" target="_blank" rel="noopener">Post on &#120143;</a>
     </p>
   </div>
 {% endfor %}

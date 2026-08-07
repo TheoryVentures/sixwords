@@ -33,6 +33,17 @@ def test_build_site_writes_index_and_json(tmp_path):
     assert (tmp_path / ".nojekyll").exists()
 
 
+def test_build_site_renders_x_share_link(tmp_path):
+    build_site(_ideas(), tmp_path)
+
+    index = (tmp_path / "index.html").read_text()
+    assert 'href="https://x.com/intent/post?text=' in index
+    # The prefilled tweet carries the story, the @grok mention, and the subtext URL.
+    assert "For%20sale%3A%20baby%20shoes%2C%20never%20worn." in index
+    assert "%40grok" in index
+    assert "sixwordidea.com/ideas/baby-shoes.json" in index
+
+
 def test_build_site_empty(tmp_path):
     build_site([], tmp_path)
     assert "Nothing published yet" in (tmp_path / "index.html").read_text()
